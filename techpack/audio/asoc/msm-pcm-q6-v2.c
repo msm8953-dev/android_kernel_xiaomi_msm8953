@@ -387,7 +387,7 @@ static int msm_pcm_playback_prepare(struct snd_pcm_substream *substream)
 			return -ENOMEM;
 		}
 	} else {
-#if (defined CONFIG_MACH_XIAOMI_C6) || (defined CONFIG_MACH_XIAOMI_D2)
+#ifdef CONFIG_MACH_XIAOMI_C6
 		ret = q6asm_open_write_v3(prtd->audio_client,
 			fmt_type, bits_per_sample);
 #else
@@ -439,7 +439,7 @@ static int msm_pcm_playback_prepare(struct snd_pcm_substream *substream)
 			runtime->channels, !prtd->set_channel_map,
 			prtd->channel_map, bits_per_sample);
 	} else {
-#if (defined CONFIG_MACH_XIAOMI_C6) || (defined CONFIG_MACH_XIAOMI_D2)
+#ifdef CONFIG_MACH_XIAOMI_C6
 		ret = q6asm_media_format_block_multi_ch_pcm_v3(
 				prtd->audio_client, runtime->rate,
 				runtime->channels, !prtd->set_channel_map,
@@ -523,7 +523,7 @@ static int msm_pcm_capture_prepare(struct snd_pcm_substream *substream)
 				__func__, params_channels(params),
 				prtd->audio_client->perf_mode);
 
-#if (defined CONFIG_MACH_XIAOMI_C6) || (defined CONFIG_MACH_XIAOMI_D2)
+#ifdef CONFIG_MACH_XIAOMI_C6
 		ret = q6asm_open_read_v3(prtd->audio_client, FORMAT_LINEAR_PCM,
 				bits_per_sample);
 #else
@@ -604,7 +604,7 @@ static int msm_pcm_capture_prepare(struct snd_pcm_substream *substream)
 	pr_debug("%s: Samp_rate = %d Channel = %d bit width = %d, word size = %d\n",
 			__func__, prtd->samp_rate, prtd->channel_mode,
 			bits_per_sample, sample_word_size);
-#if (defined CONFIG_MACH_XIAOMI_C6) || (defined CONFIG_MACH_XIAOMI_D2)
+#ifdef CONFIG_MACH_XIAOMI_C6
 	ret = q6asm_enc_cfg_blk_pcm_format_support_v3(prtd->audio_client,
 						      prtd->samp_rate,
 						      prtd->channel_mode,
