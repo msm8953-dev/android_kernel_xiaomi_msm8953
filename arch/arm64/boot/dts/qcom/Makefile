@@ -1,6 +1,7 @@
 
 ifeq ($(CONFIG_MACH_XIAOMI_MSM8953),y)
 dtb-$(CONFIG_MACH_XIAOMI_MIDO) += msm8953-qrd-sku3-mido.dtb
+dtb-$(CONFIG_MACH_XIAOMI_YSL) += msm8953-pmi8940-mtp-ysl.dts
 else
 #dtb-$(CONFIG_ARCH_QCOM)	+= apq8016-sbc.dtb msm8916-mtp.dtb
 #dtb-$(CONFIG_ARCH_QCOM)	+= msm8996-mtp.dtb
