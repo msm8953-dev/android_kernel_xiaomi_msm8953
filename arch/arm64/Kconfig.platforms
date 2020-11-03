@@ -386,6 +386,12 @@ config MACH_XIAOMI_VINCE
 	help
 	  This enabled support for Xiaomi Redmi Note 5/5 Plus 
 
+config MACH_XIAOMI_YSL
+	bool "E6 (ysl) board"
+	select MACH_XIAOMI_MSM8953
+	help
+	  This enabled support for Xiaomi Redmi S2/y2
+
 endchoice
 
 endif
