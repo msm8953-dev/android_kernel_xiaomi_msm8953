@@ -427,7 +427,7 @@ static const unsigned int smbchg_extcon_cable[] = {
 };
 
 /* fg cc workaround */
-#if defined(CONFIG_MACH_XIAOMI_C6)
+#if defined(CONFIG_MACH_XIAOMI_MIDO)
 #define NO_CHARGE_COUNTER
 #endif
 
@@ -4715,7 +4715,7 @@ static int smbchg_restricted_charging(struct smbchg_chip *chip, bool enable)
 	return rc;
 }
 
-#ifdef CONFIG_MACH_XIAOMI_C6
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 extern void ist30xx_set_ta_mode(bool mode);
 extern void tpd_usb_plugin(bool mode);
 extern void gtp_usb_plugin(bool mode);
@@ -4727,7 +4727,7 @@ static void handle_usb_removal(struct smbchg_chip *chip)
 	union power_supply_propval pval = {0, };
 	int rc;
 
-#ifdef CONFIG_MACH_XIAOMI_C6
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 	if (set_usb_charge_mode_par == 1)
 		ist30xx_set_ta_mode(0);
 	else if (set_usb_charge_mode_par == 2)
@@ -4796,7 +4796,7 @@ static bool is_usbin_uv_high(struct smbchg_chip *chip)
 }
 
 #define HVDCP_NOTIFY_MS		2500
-#ifdef CONFIG_MACH_XIAOMI_C6
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 static int rerun_apsd(struct smbchg_chip *chip);
 #endif
 static void handle_usb_insertion(struct smbchg_chip *chip)
@@ -4805,7 +4805,7 @@ static void handle_usb_insertion(struct smbchg_chip *chip)
 	int rc;
 	char *usb_type_name = "null";
 
-#ifdef CONFIG_MACH_XIAOMI_C6
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 	if (set_usb_charge_mode_par == 1)
 		ist30xx_set_ta_mode(1);
 	else if (set_usb_charge_mode_par == 2)
@@ -4817,7 +4817,7 @@ static void handle_usb_insertion(struct smbchg_chip *chip)
 	pr_smb(PR_STATUS, "triggered\n");
 	/* usb inserted */
 	read_usb_type(chip, &usb_type_name, &usb_supply_type);
-#ifdef CONFIG_MACH_XIAOMI_C6
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 	if (usb_supply_type == POWER_SUPPLY_TYPE_USB_CDP) {
 		rc = rerun_apsd(chip);
 		read_usb_type(chip, &usb_type_name, &usb_supply_type);
@@ -6132,7 +6132,7 @@ static int smbchg_battery_get_property(struct power_supply *psy,
 		val->intval = get_prop_batt_health(chip);
 		break;
 	case POWER_SUPPLY_PROP_TECHNOLOGY:
-#ifdef CONFIG_MACH_XIAOMI_C6
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 		val->intval = POWER_SUPPLY_TECHNOLOGY_LIPO;
 #else
 		val->intval = POWER_SUPPLY_TECHNOLOGY_LION;
@@ -6347,7 +6347,7 @@ static irqreturn_t batt_warm_handler(int irq, void *_chip)
 {
 	struct smbchg_chip *chip = _chip;
 	u8 reg = 0;
-#ifdef CONFIG_MACH_XIAOMI_C6
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 	int rc;
 
 	/* set the warm float voltage compensation,
@@ -6380,7 +6380,7 @@ static irqreturn_t batt_cool_handler(int irq, void *_chip)
 {
 	struct smbchg_chip *chip = _chip;
 	u8 reg = 0;
-#ifdef CONFIG_MACH_XIAOMI_C6
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 	int rc;
 
 	/* set the cool float voltage compensation,
@@ -7450,7 +7450,7 @@ static int smbchg_hw_init(struct smbchg_chip *chip)
 			dev_err(chip->dev, "Couldn't set OTG OC config rc = %d\n",
 				rc);
 
-#ifdef CONFIG_MACH_XIAOMI_C6
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 		rc = smbchg_sec_masked_write(chip, chip->otg_base + OTG_CFG,
 					     0x0c, 0x8);
 		if (rc < 0) {
@@ -8506,7 +8506,7 @@ static int smbchg_probe(struct platform_device *pdev)
 		goto votables_cleanup;
 	}
 
-#ifdef CONFIG_MACH_XIAOMI_C6
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 	chip->hvdcp_not_supported = true;
 #endif
 

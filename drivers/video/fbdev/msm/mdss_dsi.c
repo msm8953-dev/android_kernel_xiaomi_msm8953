@@ -138,7 +138,7 @@ void mdss_dump_dsi_debug_bus(u32 bus_dump_flag,
 	pr_info("========End DSI Debug Bus=========\n");
 }
 
-#ifdef CONFIG_MACH_XIAOMI_C6
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 int panel_suspend_reset_flag = 0;
 #endif
 static void mdss_dsi_pm_qos_add_request(struct mdss_dsi_ctrl_pdata *ctrl_pdata)
@@ -397,7 +397,7 @@ static int mdss_dsi_panel_power_off(struct mdss_panel_data *pdata)
 	if (mdss_dsi_pinctrl_set_state(ctrl_pdata, false))
 		pr_debug("reset disable: pinctrl not enabled\n");
 
-#ifdef CONFIG_MACH_XIAOMI_C6
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 	if (panel_suspend_reset_flag == 2)
 		msleep(1); /* delay 1ms */
 	else if (panel_suspend_reset_flag == 3)
@@ -3001,7 +3001,7 @@ static struct device_node *mdss_dsi_find_panel_of_node(
 		}
 		pr_info("%s: cmdline:%s panel_name:%s\n",
 			__func__, panel_cfg, panel_name);
-#ifdef CONFIG_MACH_XIAOMI_C6
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 		if (!strcmp(panel_name, "qcom,mdss_dsi_otm1911_fhd_video"))
 			panel_suspend_reset_flag = 2;
 		else if (!strcmp(panel_name, "qcom,mdss_dsi_ili9885_boe_fhd_video"))
@@ -4191,7 +4191,7 @@ static int mdss_dsi_parse_ctrl_params(struct platform_device *ctrl_pdev,
 
 }
 
-#ifdef CONFIG_MACH_XIAOMI_C6
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 u32 te_count;
 static irqreturn_t te_interrupt(int irq, void *data)
 {
@@ -4237,7 +4237,7 @@ int init_te_irq(struct mdss_dsi_ctrl_pdata *ctrl_pdata)
 
 	return 0;
 }
-#endif /* MACH_XIAOMI_C6 */
+#endif /* MACH_XIAOMI_MIDO */
 
 static int mdss_dsi_parse_gpio_params(struct platform_device *ctrl_pdev,
 	struct mdss_dsi_ctrl_pdata *ctrl_pdata)
@@ -4413,7 +4413,7 @@ int dsi_panel_device_register(struct platform_device *ctrl_pdev,
 		ctrl_pdata->check_status = mdss_dsi_reg_status_check;
 	else if (ctrl_pdata->status_mode == ESD_BTA)
 		ctrl_pdata->check_status = mdss_dsi_bta_status_check;
-#ifdef CONFIG_MACH_XIAOMI_C6
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 	else if (ctrl_pdata->status_mode == ESD_TE_NT35596) {
 		ctrl_pdata->check_status = mdss_dsi_TE_NT35596_check;
 		init_te_irq(ctrl_pdata);

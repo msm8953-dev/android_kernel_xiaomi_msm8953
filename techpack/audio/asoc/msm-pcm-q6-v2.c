@@ -437,7 +437,7 @@ static int msm_pcm_playback_prepare(struct snd_pcm_substream *substream)
 			runtime->channels, !prtd->set_channel_map,
 			prtd->channel_map, bits_per_sample);
 	} else {
-#ifdef CONFIG_MACH_XIAOMI_C6
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 		if (q6core_get_avs_version() < Q6_SUBSYS_AVS2_8) {
 			ret = q6asm_media_format_block_multi_ch_pcm_v3(
 				prtd->audio_client, runtime->rate,
@@ -600,7 +600,7 @@ static int msm_pcm_capture_prepare(struct snd_pcm_substream *substream)
 	pr_debug("%s: Samp_rate = %d Channel = %d bit width = %d, word size = %d\n",
 			__func__, prtd->samp_rate, prtd->channel_mode,
 			bits_per_sample, sample_word_size);
-#ifdef CONFIG_MACH_XIAOMI_C6
+#ifdef CONFIG_MACH_XIAOMI_MIDO
 	if (q6core_get_avs_version() < Q6_SUBSYS_AVS2_8)
 		ret = q6asm_enc_cfg_blk_pcm_format_support_v3(
 						prtd->audio_client,
