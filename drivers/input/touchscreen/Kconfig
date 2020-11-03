@@ -6,4 +6,6 @@ if MACH_XIAOMI_MSM8953
 
 source "drivers/input/touchscreen/xiaomi/mido/Kconfig"
 
+source "drivers/input/touchscreen/xiaomi/ysl/Kconfig"
+
 endif
